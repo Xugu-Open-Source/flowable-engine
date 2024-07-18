@@ -4,8 +4,8 @@ create table ACT_HI_PROCINST (
     PROC_INST_ID_ varchar(64) not null,
     BUSINESS_KEY_ varchar(255),
     PROC_DEF_ID_ varchar(64) not null,
-    START_TIME_ datetime not null,
-    END_TIME_ datetime,
+    START_TIME_ datetime(3) not null,
+    END_TIME_ datetime(3),
     DURATION_ bigint,
     START_USER_ID_ varchar(255),
     START_ACT_ID_ varchar(255),
@@ -22,7 +22,7 @@ create table ACT_HI_PROCINST (
     BUSINESS_STATUS_ varchar(255),
     primary key (ID_),
     unique (PROC_INST_ID_)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
+) ;
 
 create table ACT_HI_ACTINST (
     ID_ varchar(64) not null,
@@ -36,14 +36,14 @@ create table ACT_HI_ACTINST (
     ACT_NAME_ varchar(255),
     ACT_TYPE_ varchar(255) not null,
     ASSIGNEE_ varchar(255),
-    START_TIME_ datetime not null,
-    END_TIME_ datetime,
+    START_TIME_ datetime(3) not null,
+    END_TIME_ datetime(3),
     TRANSACTION_ORDER_ integer,
     DURATION_ bigint,
     DELETE_REASON_ varchar(4000),
     TENANT_ID_ varchar(255) default '',
     primary key (ID_)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
+) ;
 
 create table ACT_HI_DETAIL (
     ID_ varchar(64) not null,
@@ -55,19 +55,19 @@ create table ACT_HI_DETAIL (
     NAME_ varchar(255) not null,
     VAR_TYPE_ varchar(255),
     REV_ integer,
-    TIME_ datetime not null,
+    TIME_ datetime(3) not null,
     BYTEARRAY_ID_ varchar(64),
     DOUBLE_ double,
     LONG_ bigint,
     TEXT_ varchar(4000),
     TEXT2_ varchar(4000),
     primary key (ID_)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
+) ;
 
 create table ACT_HI_COMMENT (
     ID_ varchar(64) not null,
     TYPE_ varchar(255),
-    TIME_ datetime not null,
+    TIME_ datetime(3) not null,
     USER_ID_ varchar(255),
     TASK_ID_ varchar(64),
     PROC_INST_ID_ varchar(64),
@@ -75,7 +75,7 @@ create table ACT_HI_COMMENT (
     MESSAGE_ varchar(4000),
     FULL_MSG_ blob,
     primary key (ID_)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
+) ;
 
 create table ACT_HI_ATTACHMENT (
     ID_ varchar(64) not null,
@@ -88,9 +88,10 @@ create table ACT_HI_ATTACHMENT (
     PROC_INST_ID_ varchar(64),
     URL_ varchar(4000),
     CONTENT_ID_ varchar(64),
-    TIME_ datetime,
+    TIME_ datetime(3),
     primary key (ID_)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin;
+) ;
+
 
 create index ACT_IDX_HI_PRO_INST_END on ACT_HI_PROCINST(END_TIME_);
 create index ACT_IDX_HI_PRO_I_BUSKEY on ACT_HI_PROCINST(BUSINESS_KEY_);
