@@ -91,6 +91,24 @@ public class DbSqlSessionFactory implements SessionFactory {
         addDatabaseSpecificStatement("xugu", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
         addDatabaseSpecificStatement("xugu", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
 
+        // cae specific
+        databaseSpecificLimitBeforeStatements.put("cae", "");
+        databaseSpecificLimitAfterStatements.put("cae", "LIMIT #{maxResults} OFFSET #{firstResult}");
+        databaseSpecificLimitBetweenStatements.put("cae", "");
+        databaseOuterJoinLimitBetweenStatements.put("cae", "");
+        databaseSpecificOrderByStatements.put("cae", defaultOrderBy);
+        addDatabaseSpecificStatement("cae", "selectProcessDefinitionsByQueryCriteria", "selectProcessDefinitionsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectProcessDefinitionCountByQueryCriteria", "selectProcessDefinitionCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectDeploymentsByQueryCriteria", "selectDeploymentsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectDeploymentCountByQueryCriteria", "selectDeploymentCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectModelCountByQueryCriteria", "selectModelCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "updateExecutionTenantIdForDeployment", "updateExecutionTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateTaskTenantIdForDeployment", "updateTaskTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateJobTenantIdForDeployment", "updateJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateTimerJobTenantIdForDeployment", "updateTimerJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
+
         // postgres specific
         databaseSpecificLimitBeforeStatements.put("postgres", "");
         databaseSpecificLimitAfterStatements.put("postgres", "LIMIT #{maxResults} OFFSET #{firstResult}");
