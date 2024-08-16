@@ -31,7 +31,7 @@ create table ACT_HI_TASKINST (
 ) ;
 
 create table ACT_HI_TSK_LOG (
-    ID_ bigint auto_increment,
+    ID_ bigint identity(1,1),
     TYPE_ varchar(64),
     TASK_ID_ varchar(64) not null,
     TIME_STAMP_ timestamp(3) not null,

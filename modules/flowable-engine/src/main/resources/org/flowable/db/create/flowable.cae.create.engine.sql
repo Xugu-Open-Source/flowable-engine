@@ -95,7 +95,7 @@ create table ACT_RE_PROCDEF (
 ) ;
 
 create table ACT_EVT_LOG (
-    LOG_NR_ bigint auto_increment,
+    LOG_NR_ bigint identity(1,1),
     TYPE_ varchar(64),
     PROC_DEF_ID_ varchar(64),
     PROC_INST_ID_ varchar(64),
