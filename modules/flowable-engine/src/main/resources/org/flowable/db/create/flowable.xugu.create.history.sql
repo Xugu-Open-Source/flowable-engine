@@ -73,7 +73,7 @@ create table ACT_HI_COMMENT (
     PROC_INST_ID_ varchar(64),
     ACTION_ varchar(255),
     MESSAGE_ varchar(4000),
-    FULL_MSG_ LONGBLOB,
+    FULL_MSG_ BLOB,
     primary key (ID_)
 );
 

@@ -115,7 +115,7 @@ create table ACT_RU_DEADLETTER_JOB (
     CREATE_TIME_ timestamp(3) NULL,
     TENANT_ID_ varchar(255) default '',
     primary key (ID_)
-)
+);
 
 create table ACT_RU_HISTORY_JOB (
     ID_ varchar(64) NOT NULL,
