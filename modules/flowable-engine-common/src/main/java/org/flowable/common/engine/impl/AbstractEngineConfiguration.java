@@ -410,6 +410,7 @@ public abstract class AbstractEngineConfiguration {
         databaseTypeMappings.setProperty("DB2 UDB AS400", DATABASE_TYPE_DB2);
         databaseTypeMappings.setProperty(PRODUCT_NAME_CRDB, DATABASE_TYPE_COCKROACHDB);
         databaseTypeMappings.setProperty("XuGU", DATABASE_TYPE_XUGU);
+        databaseTypeMappings.setProperty("XuguDB", DATABASE_TYPE_XUGU);
         return databaseTypeMappings;
     }
 
