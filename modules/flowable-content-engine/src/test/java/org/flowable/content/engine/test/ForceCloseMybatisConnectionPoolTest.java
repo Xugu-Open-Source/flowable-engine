@@ -31,7 +31,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = true
         StandaloneInMemContentEngineConfiguration standaloneInMemContentEngineConfiguration = new StandaloneInMemContentEngineConfiguration();
-        standaloneInMemContentEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
+        standaloneInMemContentEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-content-" + this.getClass().getName());
         standaloneInMemContentEngineConfiguration.setForceCloseMybatisConnectionPool(true);
 
         ContentEngine contentEngine = standaloneInMemContentEngineConfiguration.buildContentEngine();
@@ -55,7 +55,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = false
         StandaloneInMemContentEngineConfiguration standaloneInMemContentEngineConfiguration = new StandaloneInMemContentEngineConfiguration();
-        standaloneInMemContentEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
+        standaloneInMemContentEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-content-" + this.getClass().getName());
         standaloneInMemContentEngineConfiguration.setForceCloseMybatisConnectionPool(false);
 
         ContentEngine contentEngine = standaloneInMemContentEngineConfiguration.buildContentEngine();

@@ -32,7 +32,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = true
         StandaloneInMemFormEngineConfiguration standaloneInMemFormEngineConfiguration =  new StandaloneInMemFormEngineConfiguration();
-        standaloneInMemFormEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
+        standaloneInMemFormEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-form-" + this.getClass().getName());
         standaloneInMemFormEngineConfiguration.setForceCloseMybatisConnectionPool(true);
 
         FormEngine formEngine = standaloneInMemFormEngineConfiguration.buildFormEngine();

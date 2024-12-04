@@ -15,16 +15,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.caedb</groupId>
-            <artifactId>cae-jdbc</artifactId>
-            <version>12.2.9-beta</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xugudb</groupId>
-            <artifactId>xugu-jdbc</artifactId>
-            <version>12.3.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-bpmn-converter</artifactId>
         </dependency>
