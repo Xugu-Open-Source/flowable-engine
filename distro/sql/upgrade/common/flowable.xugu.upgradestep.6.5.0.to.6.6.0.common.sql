@@ -31,7 +31,7 @@ create table ACT_RU_EXTERNAL_JOB (
     REV_ integer,
     CATEGORY_ varchar(255),
     TYPE_ varchar(255) NOT NULL,
-    LOCK_EXP_TIME_ timestamp(3) NULL,
+    LOCK_EXP_TIME_ datetime,
     LOCK_OWNER_ varchar(255),
     EXCLUSIVE_ boolean,
     EXECUTION_ID_ varchar(64),

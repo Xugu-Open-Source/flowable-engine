@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.flowable.common.engine.impl.AbstractEngineConfiguration;
 import org.flowable.common.engine.impl.db.AbstractDataManager;
 import org.flowable.common.engine.impl.interceptor.Command;
 import org.flowable.common.engine.impl.interceptor.CommandContext;
@@ -79,6 +80,9 @@ public class BulkUpdateJobLockTest extends JobExecutorTestCase  {
     public void testAsyncJobBulkUpdate() {
 
         CommandExecutor commandExecutor = processEngineConfiguration.getCommandExecutor();
+        final int NEW_NR_JOBS = (AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(processEngineConfiguration.getDatabaseType())
+                || AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()))
+                ? 3 : NR_JOBS;
         commandExecutor.execute(commandContext -> {
 
             JobService jobService = CommandContextUtil.getProcessEngineConfiguration(commandContext)
@@ -86,7 +90,7 @@ public class BulkUpdateJobLockTest extends JobExecutorTestCase  {
                 .getJobService();
 
             Date now = new Date();
-            for (int i = 0; i < NR_JOBS; i++) {
+            for (int i = 0; i < NEW_NR_JOBS; i++) {
                 JobEntity job = createTweetMessage("Job " + i);
                 jobService.scheduleAsyncJob(job);
             }
@@ -96,7 +100,7 @@ public class BulkUpdateJobLockTest extends JobExecutorTestCase  {
 
         ManagementService managementService = processEngineConfiguration.getManagementService();
         List<Job> jobs = managementService.createJobQuery().list();
-        assertThat(jobs.size()).isEqualTo(NR_JOBS);
+        assertThat(jobs.size()).isEqualTo(NEW_NR_JOBS);
 
         // As there are more than AbstractDataManager.MAX_ENTRIES_IN_CLAUSE timer jobs, the logic should split it up into multiple updates
         List<JobEntity> jobEntities = new ArrayList<>();

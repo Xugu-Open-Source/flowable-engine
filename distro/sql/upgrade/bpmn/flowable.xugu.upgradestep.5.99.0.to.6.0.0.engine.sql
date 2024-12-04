@@ -7,10 +7,10 @@ update ACT_RE_DEPLOYMENT set ENGINE_VERSION_ = 'v5';
 alter table ACT_RU_EXECUTION add column ROOT_PROC_INST_ID_ varchar(64);
 create index ACT_IDX_EXEC_ROOT on ACT_RU_EXECUTION(ROOT_PROC_INST_ID_);
 
-alter table ACT_RU_EXECUTION  drop foreign key ACT_FK_EXE_PARENT;
+alter table ACT_RU_EXECUTION  drop CONSTRAINT ACT_FK_EXE_PARENT;
 alter table ACT_RU_EXECUTION add constraint ACT_FK_EXE_PARENT foreign key (PARENT_ID_) references ACT_RU_EXECUTION (ID_) on delete cascade; 
 
-alter table ACT_RU_EXECUTION drop foreign key ACT_FK_EXE_SUPER;
+alter table ACT_RU_EXECUTION drop CONSTRAINT ACT_FK_EXE_SUPER;
 alter table ACT_RU_EXECUTION add constraint ACT_FK_EXE_SUPER foreign key (SUPER_EXEC_) references ACT_RU_EXECUTION (ID_) on delete cascade;
 
 alter table ACT_RU_EXECUTION add column IS_MI_ROOT_ TINYINT;
@@ -19,7 +19,7 @@ create table ACT_RU_TIMER_JOB (
     ID_ varchar(64) NOT NULL,
     REV_ integer,
     TYPE_ varchar(255) NOT NULL,
-    LOCK_EXP_TIME_ timestamp(3) NULL,
+    LOCK_EXP_TIME_ datetime,
     LOCK_OWNER_ varchar(255),
     EXCLUSIVE_ boolean,
     EXECUTION_ID_ varchar(64),
@@ -202,7 +202,7 @@ alter table ACT_RE_DEPLOYMENT add column KEY_ varchar(255);
 update ACT_RU_EVENT_SUBSCR set PROC_DEF_ID_ = CONFIGURATION_ where EVENT_TYPE_ = 'message' and PROC_INST_ID_ is null and EXECUTION_ID_ is null and PROC_DEF_ID_ is null;
 
 -- Adding count columns for execution relationship count feature
-alter table ACT_RU_EXECUTION add column IS_COUNT_ENABLED_ TINYINT;
+alter table ACT_RU_EXECUTION add column IS_COUNT_ENABLED_ BOOLEAN;
 alter table ACT_RU_EXECUTION add column EVT_SUBSCR_COUNT_ integer; 
 alter table ACT_RU_EXECUTION add column TASK_COUNT_ integer; 
 alter table ACT_RU_EXECUTION add column JOB_COUNT_ integer; 
@@ -212,7 +212,7 @@ alter table ACT_RU_EXECUTION add column DEADLETTER_JOB_COUNT_ integer;
 alter table ACT_RU_EXECUTION add column VAR_COUNT_ integer;
 alter table ACT_RU_EXECUTION add column ID_LINK_COUNT_ integer;
 
-alter table ACT_RU_TASK add column IS_COUNT_ENABLED_ TINYINT;
+alter table ACT_RU_TASK add column IS_COUNT_ENABLED_ BOOLEAN;
 alter table ACT_RU_TASK add column VAR_COUNT_ integer;
 alter table ACT_RU_TASK add column ID_LINK_COUNT_ integer;
 

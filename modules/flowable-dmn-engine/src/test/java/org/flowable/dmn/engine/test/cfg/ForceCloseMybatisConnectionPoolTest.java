@@ -32,7 +32,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = true
         StandaloneInMemDmnEngineConfiguration standaloneInMemDmnEngineConfiguration =  new StandaloneInMemDmnEngineConfiguration();
-        standaloneInMemDmnEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-dmn-" + this.getClass().getName());
+        standaloneInMemDmnEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
         standaloneInMemDmnEngineConfiguration.setForceCloseMybatisConnectionPool(true);
 
         DmnEngine dmnEngine = standaloneInMemDmnEngineConfiguration.buildDmnEngine();
@@ -57,7 +57,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = false
         StandaloneInMemDmnEngineConfiguration standaloneInMemDmnEngineConfiguration =  new StandaloneInMemDmnEngineConfiguration();
-        standaloneInMemDmnEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-dmn-" + this.getClass().getName());
+        standaloneInMemDmnEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true" );
         standaloneInMemDmnEngineConfiguration.setForceCloseMybatisConnectionPool(false);
 
         DmnEngine dmnEngine = standaloneInMemDmnEngineConfiguration.buildDmnEngine();

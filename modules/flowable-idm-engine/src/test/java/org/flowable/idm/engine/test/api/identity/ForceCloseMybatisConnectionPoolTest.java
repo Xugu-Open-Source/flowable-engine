@@ -31,7 +31,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = true
         StandaloneInMemIdmEngineConfiguration standaloneInMemIdmEngineConfiguration = new StandaloneInMemIdmEngineConfiguration();
-        standaloneInMemIdmEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-idm-" + this.getClass().getName());
+        standaloneInMemIdmEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
         standaloneInMemIdmEngineConfiguration.setForceCloseMybatisConnectionPool(true);
         standaloneInMemIdmEngineConfiguration.setDatabaseSchemaUpdate("drop-create");
 
@@ -55,7 +55,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the AbstractEngineConfiguration is configured with forceCloseMybatisConnectionPool = false
         StandaloneInMemIdmEngineConfiguration standaloneInMemIdmEngineConfiguration = new StandaloneInMemIdmEngineConfiguration();
-        standaloneInMemIdmEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-idm-" + this.getClass().getName());
+        standaloneInMemIdmEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
         standaloneInMemIdmEngineConfiguration.setForceCloseMybatisConnectionPool(false);
         standaloneInMemIdmEngineConfiguration.setDatabaseSchemaUpdate("drop-create");
 

@@ -441,7 +441,7 @@
       </if>
       <if test="involvedUser != null">
         and (
-          exists(select LINK.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where USER_ID_ = #{involvedUser} and LINK.PROC_INST_ID_ = RES.ID_)
+          exists(select LINK1.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where USER_ID_ = #{involvedUser} and LINK1.PROC_INST_ID_ = RES.ID_)
         )
       </if>
       <if test="startedBy != null">
@@ -609,7 +609,7 @@
           </if>
           <if test="orQueryObject.involvedUser != null">
             or (
-              exists(select LINK.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where USER_ID_ = #{orQueryObject.involvedUser} and LINK.PROC_INST_ID_ = RES.ID_)
+              exists(select LINK1.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where USER_ID_ = #{orQueryObject.involvedUser} and LINK1.PROC_INST_ID_ = RES.ID_)
             )
           </if>
           <if test="orQueryObject.startedBy != null">

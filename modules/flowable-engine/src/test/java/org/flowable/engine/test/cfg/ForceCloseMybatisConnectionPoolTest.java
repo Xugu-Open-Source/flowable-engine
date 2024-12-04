@@ -32,7 +32,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the process engine is configured with forceCloseMybatisConnectionPool = true
         StandaloneInMemProcessEngineConfiguration standaloneInMemProcessEngineConfiguration =  new StandaloneInMemProcessEngineConfiguration();
-        standaloneInMemProcessEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-bpmn-" + this.getClass().getName());
+        standaloneInMemProcessEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
         standaloneInMemProcessEngineConfiguration.setForceCloseMybatisConnectionPool(true);
 
         ProcessEngine processEngine = standaloneInMemProcessEngineConfiguration.buildProcessEngine();
@@ -55,7 +55,7 @@ public class ForceCloseMybatisConnectionPoolTest {
         // given
         // that the process engine is configured with forceCloseMybatisConnectionPool = false
         StandaloneInMemProcessEngineConfiguration standaloneInMemProcessEngineConfiguration =  new StandaloneInMemProcessEngineConfiguration();
-        standaloneInMemProcessEngineConfiguration.setJdbcUrl("jdbc:h2:mem:flowable-bpmn-" + this.getClass().getName());
+        standaloneInMemProcessEngineConfiguration.setJdbcUrl("jdbc:cae://127.0.0.1:5135/flowable?uselike=true");
         standaloneInMemProcessEngineConfiguration.setForceCloseMybatisConnectionPool(false);
         ProcessEngine processEngine = standaloneInMemProcessEngineConfiguration.buildProcessEngine();
 

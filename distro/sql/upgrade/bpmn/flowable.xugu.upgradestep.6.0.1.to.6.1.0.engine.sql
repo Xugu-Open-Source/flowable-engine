@@ -5,7 +5,7 @@ alter table ACT_RU_EXECUTION add column START_ACT_ID_ varchar(255);
 create table ACT_RU_HISTORY_JOB (
     ID_ varchar(64) NOT NULL,
     REV_ integer,
-    LOCK_EXP_TIME_ timestamp(3) NULL,
+    LOCK_EXP_TIME_ datetime,
     LOCK_OWNER_ varchar(255),
     RETRIES_ integer,
     EXCEPTION_STACK_ID_ varchar(64),

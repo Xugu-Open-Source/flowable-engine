@@ -2797,6 +2797,16 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
     }
 
     @Override
+    public ProcessEngineConfiguration setJdbcUsername(String jdbcUsername) {
+        return super.setJdbcUsername(jdbcUsername);
+    }
+
+    @Override
+    public ProcessEngineConfiguration setJdbcPassword(String jdbcPassword) {
+        return super.setJdbcPassword(jdbcPassword);
+    }
+
+    @Override
     public ProcessEngineConfigurationImpl setDefaultCommandConfig(CommandConfig defaultCommandConfig) {
         this.defaultCommandConfig = defaultCommandConfig;
         return this;
