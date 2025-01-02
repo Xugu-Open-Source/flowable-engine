@@ -539,7 +539,7 @@ public abstract class AbstractEngineConfiguration {
 
         // Special care for MSSQL, as it has a hard limit of 2000 params per statement (incl bulk statement).
         // Especially with executions, with 100 as default, this limit is passed.
-        if (DATABASE_TYPE_MSSQL.equals(databaseType)) {
+        if (DATABASE_TYPE_MSSQL.equals(databaseType) || DATABASE_TYPE_XUGU.equals(databaseType)) {
             maxNrOfStatementsInBulkInsert = DEFAULT_MAX_NR_OF_STATEMENTS_BULK_INSERT_SQL_SERVER;
         }
     }
