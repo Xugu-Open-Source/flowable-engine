@@ -784,11 +784,11 @@
         <if test="!ignoreAssigneeValue">
             and RES.ASSIGNEE_ is null
         </if>
-        and exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = RES.ID_
+        and exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = RES.ID_
             and
             (
               <if test="candidateUser != null">
-                LINK.USER_ID_ = #{candidateUser}
+                LINK1.USER_ID_ = #{candidateUser}
               </if>
               <if test="candidateUser != null &amp;&amp; candidateGroups != null &amp;&amp; !candidateGroups.empty">
                 or
@@ -799,7 +799,7 @@
                     <if test="groupIndex &gt; 0">
                     or
                     </if>
-                    LINK.GROUP_ID_ IN
+                    LINK1.GROUP_ID_ IN
                     <foreach item="group" index="index" collection="candidateGroupListItem"
                          open="(" separator="," close=")">
                       #{group}
@@ -812,20 +812,20 @@
       </if>
       <if test="involvedUser != null">
         and (
-          exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.USER_ID_ = #{involvedUser} and LINK.TASK_ID_ = RES.ID_)
+          exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{involvedUser} and LINK1.TASK_ID_ = RES.ID_)
           or RES.ASSIGNEE_ = #{involvedUser}
           or RES.OWNER_ = #{involvedUser}
           )
       </if>
       <if test="involvedGroups != null">
         and EXISTS(
-          select ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_ and
+          select ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_ and
             (
     		<foreach item="involvedGroupListItem" index="groupIndex" collection="safeInvolvedGroups">
     			<if test="groupIndex &gt; 0">
     			or
     			</if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group}
@@ -999,9 +999,9 @@
                 <if test="!ignoreAssigneeValue">
                     RES.ASSIGNEE_ is null and
                 </if>
-                exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_
-                and (LINK.USER_ID_ = #{userIdForCandidateAndAssignee}
-                or LINK.GROUP_ID_ IN (select g.GROUP_ID_ from ${prefix}ACT_ID_MEMBERSHIP g where g.USER_ID_ = #{userIdForCandidateAndAssignee} )))))
+                exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_
+                and (LINK1.USER_ID_ = #{userIdForCandidateAndAssignee}
+                or LINK1.GROUP_ID_ IN (select g.GROUP_ID_ from ${prefix}ACT_ID_MEMBERSHIP g where g.USER_ID_ = #{userIdForCandidateAndAssignee} )))))
             </if>
           </if>
           <!-- if dbIdentityUsed set false in process engine configuration of using custom session factory of GroupIdentityManager -->
@@ -1011,15 +1011,15 @@
               <if test="!ignoreAssigneeValue">
                 RES.ASSIGNEE_ is null and
               </if>
-                exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_
-                and LINK.TYPE_ = 'candidate' and (LINK.USER_ID_ = #{userIdForCandidateAndAssignee}
+                exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_
+                and LINK1.TYPE_ = 'candidate' and (LINK1.USER_ID_ = #{userIdForCandidateAndAssignee}
                 <if test="candidateGroups != null &amp;&amp; !candidateGroups.empty">
                     or (
                     <foreach item="candidateGroupListItem" index="groupIndex" collection="safeCandidateGroups">
                         <if test="groupIndex &gt; 0">
                         or
                         </if>
-                        LINK.GROUP_ID_ IN
+                        LINK1.GROUP_ID_ IN
                         <foreach item="group" index="index" collection="candidateGroupListItem"
                              open="(" separator="," close=")">
                           #{group}
@@ -1346,11 +1346,11 @@
                 <if test="!orQueryObject.ignoreAssigneeValue">
                     RES.ASSIGNEE_ is null and
                 </if>
-                exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = RES.ID_
+                exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = RES.ID_
                     and
                     (
                     <if test="orQueryObject.candidateUser != null">
-                      LINK.USER_ID_ = #{orQueryObject.candidateUser}
+                      LINK1.USER_ID_ = #{orQueryObject.candidateUser}
                     </if>
                     <if test="orQueryObject.candidateUser != null &amp;&amp; orQueryObject.candidateGroups != null &amp;&amp; !orQueryObject.candidateGroups.empty">
                       or
@@ -1361,7 +1361,7 @@
                             <if test="groupIndex &gt; 0">
                             or
                             </if>
-                            LINK.GROUP_ID_ IN
+                            LINK1.GROUP_ID_ IN
                             <foreach item="group" index="index" collection="candidateGroupListItem"
                                  open="(" separator="," close=")">
                               #{group}
@@ -1375,20 +1375,20 @@
             </if>
             <if test="orQueryObject.involvedUser != null">
               or (
-                exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.USER_ID_ = #{orQueryObject.involvedUser} and LINK.TASK_ID_ = RES.ID_)
+                exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{orQueryObject.involvedUser} and LINK1.TASK_ID_ = RES.ID_)
                 or RES.ASSIGNEE_ = #{orQueryObject.involvedUser}
                 or RES.OWNER_ = #{orQueryObject.involvedUser}
                 )
             </if>
             <if test="orQueryObject.involvedGroups != null">
               or (
-                EXISTS(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_ and
+                EXISTS(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_ and
                     (
                     <foreach item="involvedGroupListItem" index="groupIndex" collection="orQueryObject.safeInvolvedGroups">
                         <if test="groupIndex &gt; 0">
                         or
                         </if>
-                        LINK.GROUP_ID_ IN
+                        LINK1.GROUP_ID_ IN
                         <foreach item="group" index="index" collection="involvedGroupListItem"
                               open="(" separator="," close=")">
                           #{group}
@@ -1565,9 +1565,9 @@
                         <if test="!orQueryObject.ignoreAssigneeValue">
                             RES.ASSIGNEE_ is null and
                         </if>
-                        exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_
-                        and (LINK.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee}
-                        or LINK.GROUP_ID_ IN (select g.GROUP_ID_ from ${prefix}ACT_ID_MEMBERSHIP g where g.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee} )))))
+                        exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_
+                        and (LINK1.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee}
+                        or LINK1.GROUP_ID_ IN (select g.GROUP_ID_ from ${prefix}ACT_ID_MEMBERSHIP g where g.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee} )))))
                   </if>
                 </if>
                 <!-- if dbIdentityUsed set false in process engine configuration of using custom session factory of GroupIdentityManager -->
@@ -1577,15 +1577,15 @@
                     <if test="!orQueryObject.ignoreAssigneeValue">
                         RES.ASSIGNEE_ is null and
                     </if>
-                    exists(select LINK.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_
-                    and LINK.TYPE_ = 'candidate' and (LINK.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee}
+                    exists(select LINK1.ID_ from ${prefix}ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_
+                    and LINK1.TYPE_ = 'candidate' and (LINK1.USER_ID_ = #{orQueryObject.userIdForCandidateAndAssignee}
                     <if test="orQueryObject.candidateGroups != null &amp;&amp; !orQueryObject.candidateGroups.empty">
                         or (
                         <foreach item="candidateGroupListItem" index="groupIndex" collection="orQueryObject.safeCandidateGroups">
                             <if test="groupIndex &gt; 0">
                             or
                             </if>
-                            LINK.GROUP_ID_ IN
+                            LINK1.GROUP_ID_ IN
                             <foreach item="group" index="index" collection="candidateGroupListItem"
                                  open="(" separator="," close=")">
                               #{group}

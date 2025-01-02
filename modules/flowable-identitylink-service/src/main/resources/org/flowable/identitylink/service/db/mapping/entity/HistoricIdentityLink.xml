@@ -134,13 +134,13 @@
   </delete>
   
   <delete id="bulkDeleteHistoricProcessIdentityLinks" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> LINK </if> from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.PROC_INST_ID_ is not null and LINK.PROC_INST_ID_ != '' and
-    NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where LINK.PROC_INST_ID_ = PROCINST.ID_)
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu'"> LINK1 </if> from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.PROC_INST_ID_ is not null and LINK1.PROC_INST_ID_ != '' and
+    NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where LINK1.PROC_INST_ID_ = PROCINST.ID_)
   </delete>
   
   <delete id="bulkDeleteHistoricProcessIdentityLinks" parameterType="java.util.Map" databaseId="oracle">
-    delete from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.PROC_INST_ID_ is not null and
-    NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where LINK.PROC_INST_ID_ = PROCINST.ID_)
+    delete from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.PROC_INST_ID_ is not null and
+    NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where LINK1.PROC_INST_ID_ = PROCINST.ID_)
   </delete>
 
   <delete id="bulkDeleteHistoricProcessIdentityLinks" databaseId="h2" parameterType="java.util.Map">
@@ -154,13 +154,13 @@
   </delete>
 
   <delete id="bulkDeleteHistoricCaseIdentityLinks" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> LINK </if> from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.SCOPE_ID_ is not null and LINK.SCOPE_ID_ != '' and LINK.SCOPE_TYPE_ = 'cmmn' and
-    NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where LINK.SCOPE_ID_ = CASEINST.ID_)
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu'"> LINK1 </if> from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.SCOPE_ID_ is not null and LINK1.SCOPE_ID_ != '' and LINK1.SCOPE_TYPE_ = 'cmmn' and
+    NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where LINK1.SCOPE_ID_ = CASEINST.ID_)
   </delete>
   
   <delete id="bulkDeleteHistoricCaseIdentityLinks" parameterType="java.util.Map" databaseId="oracle">
-    delete from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.SCOPE_ID_ is not null and LINK.SCOPE_TYPE_ = 'cmmn' and
-    NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where LINK.SCOPE_ID_ = CASEINST.ID_)
+    delete from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.SCOPE_ID_ is not null and LINK1.SCOPE_TYPE_ = 'cmmn' and
+    NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where LINK1.SCOPE_ID_ = CASEINST.ID_)
   </delete>
 
   <delete id="bulkDeleteHistoricCaseIdentityLinks" databaseId="h2" parameterType="java.util.Map">
@@ -174,13 +174,13 @@
   </delete>
 
   <delete id="bulkDeleteHistoricTaskIdentityLinks" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> LINK </if> from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ is not null and LINK.TASK_ID_ != '' and
-    NOT EXISTS (select TASK.ID_ from ${prefix}ACT_HI_TASKINST TASK where LINK.TASK_ID_ = TASK.ID_)
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu'"> LINK1 </if> from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ is not null and LINK1.TASK_ID_ != '' and
+    NOT EXISTS (select TASK.ID_ from ${prefix}ACT_HI_TASKINST TASK where LINK1.TASK_ID_ = TASK.ID_)
   </delete>
   
   <delete id="bulkDeleteHistoricTaskIdentityLinks" parameterType="java.util.Map" databaseId="oracle">
-    delete from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ is not null and
-    NOT EXISTS (select TASK.ID_ from ${prefix}ACT_HI_TASKINST TASK where LINK.TASK_ID_ = TASK.ID_)
+    delete from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ is not null and
+    NOT EXISTS (select TASK.ID_ from ${prefix}ACT_HI_TASKINST TASK where LINK1.TASK_ID_ = TASK.ID_)
   </delete>
 
   <delete id="bulkDeleteHistoricTaskIdentityLinks" databaseId="h2"  parameterType="java.util.Map">
