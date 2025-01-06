@@ -25,7 +25,7 @@ create table ACT_RU_TASK (
     TENANT_ID_ varchar(255) default '',
     FORM_KEY_ varchar(255),
     CLAIM_TIME_ datetime(3),
-    IS_COUNT_ENABLED_ TINYINT,
+    IS_COUNT_ENABLED_ boolean,
     VAR_COUNT_ integer,
     ID_LINK_COUNT_ integer,
     SUB_TASK_COUNT_ integer,

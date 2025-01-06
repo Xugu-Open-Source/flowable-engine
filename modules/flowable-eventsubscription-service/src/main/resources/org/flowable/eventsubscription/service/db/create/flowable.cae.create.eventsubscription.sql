@@ -13,7 +13,7 @@ create table ACT_RU_EVENT_SUBSCR (
     SCOPE_ID_ varchar(64),
     SCOPE_DEFINITION_ID_ varchar(64),
     SCOPE_TYPE_ varchar(64),
-    LOCK_TIME_ timestamp(3) NULL,
+    LOCK_TIME_ datetime NULL,
     LOCK_OWNER_ varchar(255),
     TENANT_ID_ varchar(255) default '',
     primary key (ID_)
