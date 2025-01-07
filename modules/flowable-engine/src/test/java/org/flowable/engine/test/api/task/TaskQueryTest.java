@@ -771,6 +771,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
             int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+            maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
             List<String> testCandidateGroups = new ArrayList<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {
@@ -812,6 +813,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
             int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+            maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
             List<String> testCandidateGroups = new ArrayList<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {
@@ -1784,6 +1786,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
         // SQL Server has a limit of 2100 on how many parameters a query might have
         int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+        maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
         List<String> testCandidateGroups = new ArrayList<>(maxGroups);
         for (int i = 0; i < maxGroups; i++) {
@@ -1842,6 +1845,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
         // SQL Server has a limit of 2100 on how many parameters a query might have
         int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+        maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
         List<String> testCandidateGroups = new ArrayList<>(maxGroups);
         for (int i = 0; i < maxGroups; i++) {
@@ -2070,6 +2074,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
         // SQL Server has a limit of 2100 on how many parameters a query might have
         int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+        maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
         List<String> testCandidateGroups = new ArrayList<>(maxGroups);
         for (int i = 0; i < maxGroups; i++) {
@@ -2122,6 +2127,7 @@ public class TaskQueryTest extends PluggableFlowableTestCase {
 
         // SQL Server has a limit of 2100 on how many parameters a query might have
         int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
+        maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
 
         List<String> testCandidateGroups = new ArrayList<>(maxGroups);
         for (int i = 0; i < maxGroups; i++) {

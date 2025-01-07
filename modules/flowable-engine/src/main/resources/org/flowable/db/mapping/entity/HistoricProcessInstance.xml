@@ -785,7 +785,7 @@
         and A.END_TIME_ is null)
       </if>
       <if test="involvedUser != null">
-        and (exists(select LINK.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where USER_ID_ = #{involvedUser} and LINK.PROC_INST_ID_ = ${queryTablePrefix}ID_))
+        and (exists(select LINK1.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where USER_ID_ = #{involvedUser} and LINK1.PROC_INST_ID_ = ${queryTablePrefix}ID_))
       </if>
       <if test="involvedUserIdentityLink != null">
           and EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK I where I.PROC_INST_ID_ = ${queryTablePrefix}ID_ and 
@@ -793,13 +793,13 @@
       </if>
       <if test="involvedGroups != null">
           and EXISTS(
-          select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.PROC_INST_ID_ = ${queryTablePrefix}ID_ and 
+          select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.PROC_INST_ID_ = ${queryTablePrefix}ID_ and
             (
             <foreach item="involvedGroupListItem" index="groupIndex" collection="safeInvolvedGroups">
                 <if test="groupIndex &gt; 0">
                 or
                 </if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group}
@@ -916,7 +916,7 @@
         and A.END_TIME_ is null)
       </if>
       <if test="orQueryObject.involvedUser != null">
-        or (exists(select LINK.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where USER_ID_ = #{orQueryObject.involvedUser} and LINK.PROC_INST_ID_ = ${queryTablePrefix}ID_))
+        or (exists(select LINK1.USER_ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where USER_ID_ = #{orQueryObject.involvedUser} and LINK1.PROC_INST_ID_ = ${queryTablePrefix}ID_))
       </if>
       <if test="orQueryObject.involvedUserIdentityLink != null">
           or EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK I where I.PROC_INST_ID_ = ${queryTablePrefix}ID_ and 
@@ -924,13 +924,13 @@
       </if>
       <if test="orQueryObject.involvedGroups != null">
         or EXISTS(
-              select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.PROC_INST_ID_ = ${queryTablePrefix}ID_ and 
+              select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.PROC_INST_ID_ = ${queryTablePrefix}ID_ and
                 (
                 <foreach item="involvedGroupListItem" index="groupIndex" collection="orQueryObject.safeInvolvedGroups">
                     <if test="groupIndex &gt; 0">
                     or
                     </if>
-                    LINK.GROUP_ID_ IN
+                    LINK1.GROUP_ID_ IN
                     <foreach item="group" index="index" collection="involvedGroupListItem"
                           open="(" separator="," close=")">
                       #{group}

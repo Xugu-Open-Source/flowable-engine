@@ -73,6 +73,24 @@ public class DbSqlSessionFactory implements SessionFactory {
         addDatabaseSpecificStatement("mysql", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
         addDatabaseSpecificStatement("mysql", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
 
+        // xugu specific
+        databaseSpecificLimitBeforeStatements.put("xugu", "");
+        databaseSpecificLimitAfterStatements.put("xugu", "LIMIT #{maxResults} OFFSET #{firstResult}");
+        databaseSpecificLimitBetweenStatements.put("xugu", "");
+        databaseOuterJoinLimitBetweenStatements.put("xugu", "");
+        databaseSpecificOrderByStatements.put("xugu", defaultOrderBy);
+        addDatabaseSpecificStatement("xugu", "selectProcessDefinitionsByQueryCriteria", "selectProcessDefinitionsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectProcessDefinitionCountByQueryCriteria", "selectProcessDefinitionCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectDeploymentsByQueryCriteria", "selectDeploymentsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectDeploymentCountByQueryCriteria", "selectDeploymentCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectModelCountByQueryCriteria", "selectModelCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "updateExecutionTenantIdForDeployment", "updateExecutionTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateTaskTenantIdForDeployment", "updateTaskTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateJobTenantIdForDeployment", "updateJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateTimerJobTenantIdForDeployment", "updateTimerJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
+
         // postgres specific
         databaseSpecificLimitBeforeStatements.put("postgres", "");
         databaseSpecificLimitAfterStatements.put("postgres", "LIMIT #{maxResults} OFFSET #{firstResult}");
