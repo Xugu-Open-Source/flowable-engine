@@ -66,6 +66,7 @@ public class ModelerDatabaseConfiguration {
     public static final String DATABASE_TYPE_MSSQL = "mssql";
     public static final String DATABASE_TYPE_DB2 = "db2";
     public static final String DATABASE_TYPE_XUGU = "xugu";
+    public static final String DATABASE_TYPE_CAE = "cae";
 
     public static Properties getDefaultDatabaseTypeMappings() {
         Properties databaseTypeMappings = new Properties();
@@ -99,6 +100,7 @@ public class ModelerDatabaseConfiguration {
         databaseTypeMappings.setProperty("DB2/2", DATABASE_TYPE_DB2);
         databaseTypeMappings.setProperty("DB2 UDB AS400", DATABASE_TYPE_DB2);
         databaseTypeMappings.setProperty("XuguDB", DATABASE_TYPE_XUGU);
+        databaseTypeMappings.setProperty("CAEDB SQL Server", DATABASE_TYPE_CAE);
         return databaseTypeMappings;
     }
 
