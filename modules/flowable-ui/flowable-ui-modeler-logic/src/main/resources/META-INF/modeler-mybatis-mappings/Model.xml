@@ -103,10 +103,10 @@
         </where>
         <if test="sort != null">
             <if test="sort == 'nameAsc'">
-                order by name asc
+                order by `name` asc
             </if>
             <if test="sort == 'nameDesc'">
-                order by name desc
+                order by `name` desc
             </if>
             <if test="sort == 'modifiedAsc'">
                 order by last_updated asc
