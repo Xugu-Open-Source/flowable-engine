@@ -292,11 +292,10 @@ public class StartAuthorizationTest extends FlowableCmmnTestCase {
                     .containsExactlyInAnyOrder("case2", "case3");
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
-            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(cmmnEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
-
-            maxGroups = (AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(cmmnEngineConfiguration.getDatabaseType())
+            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(cmmnEngineConfiguration.getDatabaseType()) ? 2050 :
+                    ((AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(cmmnEngineConfiguration.getDatabaseType())
                     || AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(cmmnEngineConfiguration.getDatabaseType()))
-                    ? 2047 : maxGroups;
+                    ? 2047 : 2100);
 
             Set<String> testGroups = new HashSet<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {

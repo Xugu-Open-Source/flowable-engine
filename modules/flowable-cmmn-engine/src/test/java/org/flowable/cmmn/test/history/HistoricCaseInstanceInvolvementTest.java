@@ -200,11 +200,10 @@ public class HistoricCaseInstanceInvolvementTest extends FlowableCmmnTestCase {
                 Stream.of("testGroup", "testGroup2", "testGroup3").collect(Collectors.toSet())).singleResult().getId()).isEqualTo(caseInstance.getId());
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
-            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(cmmnEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
-
-            maxGroups = (AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(cmmnEngineConfiguration.getDatabaseType())
+            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(cmmnEngineConfiguration.getDatabaseType()) ? 2050 :
+                    ((AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(cmmnEngineConfiguration.getDatabaseType())
                     || AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(cmmnEngineConfiguration.getDatabaseType()))
-                    ? 2044 : maxGroups;
+                    ? 2044 : 2100);
 
             Set<String> testGroups = new HashSet<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {
