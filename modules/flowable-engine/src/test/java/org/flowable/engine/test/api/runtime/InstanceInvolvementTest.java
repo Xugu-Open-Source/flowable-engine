@@ -179,10 +179,10 @@ public class InstanceInvolvementTest extends PluggableFlowableTestCase {
         assertThat(runtimeService.createProcessInstanceQuery().involvedGroups(Collections.singleton("testGroup")).list().get(0).getId()).isEqualTo(processInstance.getId());
 
         // SQL Server has a limit of 2100 on how many parameters a query might have
-        int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
-        maxGroups = (AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType())
+        int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 :
+                ((AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType())
                 || AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(processEngineConfiguration.getDatabaseType()))
-                ? 2040 : 2100;
+                ? 2040 : 2100);
 
         Set<String> testGroups = new HashSet<>(maxGroups);
         for (int i = 0; i < maxGroups; i++) {
@@ -542,10 +542,10 @@ public class InstanceInvolvementTest extends PluggableFlowableTestCase {
             assertThat(historyService.createHistoricProcessInstanceQuery().involvedGroups(Collections.singleton("testGroup")).list().get(0).getId()).isEqualTo(processInstance.getId());
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
-            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
-            maxGroups = (AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType())
+            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 :
+                    ((AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType())
                     || AbstractEngineConfiguration.DATABASE_TYPE_CAE.equals(processEngineConfiguration.getDatabaseType()))
-                    ? 2040 : 2100;
+                    ? 2040 : 2100);
 
             Set<String> testGroups = new HashSet<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {
