@@ -355,8 +355,8 @@ public class StartAuthorizationTest extends PluggableFlowableTestCase {
                 .containsExactlyInAnyOrder("process2", "process3", "process4");
 
             // SQL Server has a limit of 2100 on how many parameters a query might have
-            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 : 2100;
-            maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100;
+            int maxGroups = AbstractEngineConfiguration.DATABASE_TYPE_MSSQL.equals(processEngineConfiguration.getDatabaseType()) ? 2050 :
+                    (AbstractEngineConfiguration.DATABASE_TYPE_XUGU.equals(processEngineConfiguration.getDatabaseType()) ? 2040 : 2100);
 
             Set<String> testGroups = new HashSet<>(maxGroups);
             for (int i = 0; i < maxGroups; i++) {
