@@ -314,7 +314,7 @@
   </delete>
   
   <delete id="bulkDeleteHistoricTaskInstancesForNonExistingProcessInstances" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.PROC_INST_ID_ is not null and TASK.PROC_INST_ID_ != '' and
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.PROC_INST_ID_ is not null and TASK.PROC_INST_ID_ != '' and
     NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where TASK.PROC_INST_ID_ = PROCINST.ID_)
   </delete>
   
@@ -334,7 +334,7 @@
   </delete>
 
   <delete id="bulkDeleteHistoricTaskInstancesForNonExistingCaseInstances" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.SCOPE_ID_ is not null and TASK.SCOPE_ID_ != '' and TASK.SCOPE_TYPE_ = 'cmmn' and
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.SCOPE_ID_ is not null and TASK.SCOPE_ID_ != '' and TASK.SCOPE_TYPE_ = 'cmmn' and
     NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where TASK.SCOPE_ID_ = CASEINST.ID_)
   </delete>
   
@@ -1320,11 +1320,11 @@
         <if test="!ignoreAssigneeValue">
             and ${queryTablePrefix}ASSIGNEE_ is null
         </if>
-        and EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = ${queryTablePrefix}ID_
+        and EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = ${queryTablePrefix}ID_
             and
             (
               <if test="candidateUser != null">
-                LINK.USER_ID_ = #{candidateUser}
+                LINK1.USER_ID_ = #{candidateUser}
               </if>
               <if test="candidateUser != null &amp;&amp; candidateGroups != null &amp;&amp; !candidateGroups.empty">
                 or
@@ -1335,7 +1335,7 @@
                 	<if test="groupIndex &gt; 0">
                 	or
                 	</if>
-                	LINK.GROUP_ID_ IN
+                	LINK1.GROUP_ID_ IN
                 	<foreach item="group" index="index" collection="candidateGroupListItem"
                          open="(" separator="," close=")">
                   	  #{group}
@@ -1348,19 +1348,19 @@
       </if>
       <if test="involvedUser != null">
         and (
-          EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.USER_ID_ = #{involvedUser} and LINK.TASK_ID_ = ${queryTablePrefix}ID_)
+          EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{involvedUser} and LINK1.TASK_ID_ = ${queryTablePrefix}ID_)
           or ${queryTablePrefix}ASSIGNEE_ = #{involvedUser}
           or ${queryTablePrefix}OWNER_ = #{involvedUser}
           )
       </if>
       <if test="involvedGroups != null">
-        and EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ = ${queryTablePrefix}ID_ and
+        and EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = ${queryTablePrefix}ID_ and
             (
     		<foreach item="involvedGroupListItem" index="groupIndex" collection="safeInvolvedGroups">
     			<if test="groupIndex &gt; 0">
     			or
     			</if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group}
@@ -1600,11 +1600,11 @@
         or (${queryTablePrefix}DELETE_REASON_ = '' or ${queryTablePrefix}DELETE_REASON_ is null)
       </if>
       <if test="orQueryObject.candidateUser != null || orQueryObject.candidateGroups != null">
-        or (EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = ${queryTablePrefix}ID_
+        or (EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = ${queryTablePrefix}ID_
             and
             (
               <if test="orQueryObject.candidateUser != null">
-                LINK.USER_ID_ = #{orQueryObject.candidateUser}
+                LINK1.USER_ID_ = #{orQueryObject.candidateUser}
               </if>
               <if test="orQueryObject.candidateUser != null &amp;&amp; orQueryObject.candidateGroups != null &amp;&amp; !orQueryObject.candidateGroups.empty">
                 or
@@ -1615,7 +1615,7 @@
                     <if test="groupIndex &gt; 0">
                     or
                     </if>
-                    LINK.GROUP_ID_ IN
+                    LINK1.GROUP_ID_ IN
                     <foreach item="group" index="index" collection="candidateGroupListItem"
                          open="(" separator="," close=")">
                       #{group}
@@ -1632,20 +1632,20 @@
       </if>
       <if test="orQueryObject.involvedUser != null">
         or (
-          EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.USER_ID_ = #{orQueryObject.involvedUser} and LINK.TASK_ID_ = ${queryTablePrefix}ID_)
+          EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{orQueryObject.involvedUser} and LINK1.TASK_ID_ = ${queryTablePrefix}ID_)
           or ${queryTablePrefix}ASSIGNEE_ = #{orQueryObject.involvedUser}
           or ${queryTablePrefix}OWNER_ = #{orQueryObject.involvedUser}
           )
       </if>
       <if test="orQueryObject.involvedGroups != null">
         or
-          EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ = ${queryTablePrefix}ID_ and
+          EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = ${queryTablePrefix}ID_ and
             (
     		<foreach item="involvedGroupListItem" index="groupIndex" collection="orQueryObject.safeInvolvedGroups">
     			<if test="groupIndex &gt; 0">
     			or
     			</if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group}
