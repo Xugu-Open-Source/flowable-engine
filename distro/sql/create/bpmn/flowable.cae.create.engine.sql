@@ -101,7 +101,7 @@ create table ACT_EVT_LOG (
     PROC_INST_ID_ varchar(64),
     EXECUTION_ID_ varchar(64),
     TASK_ID_ varchar(64),
-    TIME_STAMP_ timestamp(3) not null DEFAULT CURRENT_TIMESTAMP(3),
+    TIME_STAMP_ timestamp(3) not null DEFAULT CURRENT_TIMESTAMP,
     USER_ID_ varchar(255),
     DATA_ BLOB,
     LOCK_OWNER_ varchar(255),

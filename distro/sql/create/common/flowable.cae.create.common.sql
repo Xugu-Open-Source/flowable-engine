@@ -578,7 +578,7 @@ create table ACT_RU_EVENT_SUBSCR (
     PROC_INST_ID_ varchar(64),
     ACTIVITY_ID_ varchar(64),
     CONFIGURATION_ varchar(255),
-    CREATED_ timestamp(3) not null DEFAULT CURRENT_TIMESTAMP(3),
+    CREATED_ timestamp(3) not null DEFAULT CURRENT_TIMESTAMP,
     PROC_DEF_ID_ varchar(64),
     SUB_SCOPE_ID_ varchar(64),
     SCOPE_ID_ varchar(64),
