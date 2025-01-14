@@ -376,6 +376,7 @@ public abstract class AbstractEngineConfiguration {
     public static final String DATABASE_TYPE_DB2 = "db2";
     public static final String DATABASE_TYPE_COCKROACHDB = "cockroachdb";
     public static final String DATABASE_TYPE_XUGU = "xugu";
+    public static final String DATABASE_TYPE_CAE = "cae";
 
     public static Properties getDefaultDatabaseTypeMappings() {
         Properties databaseTypeMappings = new Properties();
@@ -410,6 +411,7 @@ public abstract class AbstractEngineConfiguration {
         databaseTypeMappings.setProperty("DB2 UDB AS400", DATABASE_TYPE_DB2);
         databaseTypeMappings.setProperty(PRODUCT_NAME_CRDB, DATABASE_TYPE_COCKROACHDB);
         databaseTypeMappings.setProperty("XuguDB", DATABASE_TYPE_XUGU);
+        databaseTypeMappings.setProperty("CAEDB SQL Server", DATABASE_TYPE_CAE);
         return databaseTypeMappings;
     }
 
@@ -538,7 +540,7 @@ public abstract class AbstractEngineConfiguration {
 
         // Special care for MSSQL, as it has a hard limit of 2000 params per statement (incl bulk statement).
         // Especially with executions, with 100 as default, this limit is passed.
-        if (DATABASE_TYPE_MSSQL.equals(databaseType) || DATABASE_TYPE_XUGU.equals(databaseType)) {
+        if (DATABASE_TYPE_MSSQL.equals(databaseType) || DATABASE_TYPE_XUGU.equals(databaseType) || DATABASE_TYPE_CAE.equals(databaseType)) {
             maxNrOfStatementsInBulkInsert = DEFAULT_MAX_NR_OF_STATEMENTS_BULK_INSERT_SQL_SERVER;
         }
     }
