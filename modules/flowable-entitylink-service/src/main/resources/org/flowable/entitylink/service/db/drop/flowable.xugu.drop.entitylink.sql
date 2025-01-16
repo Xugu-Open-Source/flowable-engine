@@ -1,4 +1,4 @@
 drop index ACT_RU_ENTITYLINK.ACT_IDX_ENT_LNK_SCOPE;
 drop index ACT_RU_ENTITYLINK.ACT_IDX_ENT_LNK_SCOPE_DEF;
 
-drop table if exists ACT_RU_ENTITYLINK;
+drop table if exists ACT_RU_ENTITYLINK cascade;
