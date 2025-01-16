@@ -51,7 +51,7 @@ create table ACT_RU_EXECUTION (
     START_ACT_ID_ varchar(255),
     START_TIME_ datetime(3),
     START_USER_ID_ varchar(255),
-    LOCK_TIME_ timestamp(3) NULL,
+    LOCK_TIME_ datetime NULL,
     LOCK_OWNER_ varchar(255),
     IS_COUNT_ENABLED_ TINYINT,
     EVT_SUBSCR_COUNT_ integer,

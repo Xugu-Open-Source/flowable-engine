@@ -19,7 +19,7 @@ create table ACT_RU_TIMER_JOB (
     ID_ varchar(64) NOT NULL,
     REV_ integer,
     TYPE_ varchar(255) NOT NULL,
-    LOCK_EXP_TIME_ timestamp(3) NULL,
+    LOCK_EXP_TIME_ datetime NULL,
     LOCK_OWNER_ varchar(255),
     EXCLUSIVE_ boolean,
     EXECUTION_ID_ varchar(64),
