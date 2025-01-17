@@ -104,10 +104,10 @@ drop index ACT_RU_ACTINST.ACT_IDX_RU_ACTI_PROC_ACT;
 drop index ACT_RU_ACTINST.ACT_IDX_RU_ACTI_EXEC;
 drop index ACT_RU_ACTINST.ACT_IDX_RU_ACTI_EXEC_ACT;
 
-drop table if exists ACT_RU_ACTINST;
-drop table if exists ACT_RE_DEPLOYMENT;
-drop table if exists ACT_RE_MODEL;
-drop table if exists ACT_RE_PROCDEF;
-drop table if exists ACT_RU_EXECUTION;
-drop table if exists ACT_EVT_LOG;
-drop table if exists ACT_PROCDEF_INFO;
+drop table if exists ACT_RU_ACTINST cascade;
+drop table if exists ACT_RE_DEPLOYMENT cascade;
+drop table if exists ACT_RE_MODEL cascade;
+drop table if exists ACT_RE_PROCDEF cascade;
+drop table if exists ACT_RU_EXECUTION cascade;
+drop table if exists ACT_EVT_LOG cascade;
+drop table if exists ACT_PROCDEF_INFO cascade;
