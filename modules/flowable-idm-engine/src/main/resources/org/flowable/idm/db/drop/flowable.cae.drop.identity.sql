@@ -7,12 +7,12 @@ alter table ACT_ID_MEMBERSHIP
 alter table ACT_ID_PRIV_MAPPING
     drop CONSTRAINT ACT_FK_PRIV_MAPPING;
 
-drop table if exists ACT_ID_PROPERTY;
-drop table if exists ACT_ID_BYTEARRAY;
-drop table if exists ACT_ID_INFO;
-drop table if exists ACT_ID_MEMBERSHIP;
-drop table if exists ACT_ID_GROUP;
-drop table if exists ACT_ID_USER;
-drop table if exists ACT_ID_TOKEN;
-drop table if exists ACT_ID_PRIV;
-drop table if exists ACT_ID_PRIV_MAPPING;
+drop table if exists ACT_ID_PROPERTY cascade;
+drop table if exists ACT_ID_BYTEARRAY cascade;
+drop table if exists ACT_ID_INFO cascade;
+drop table if exists ACT_ID_MEMBERSHIP cascade;
+drop table if exists ACT_ID_GROUP cascade;
+drop table if exists ACT_ID_USER cascade;
+drop table if exists ACT_ID_TOKEN cascade;
+drop table if exists ACT_ID_PRIV cascade;
+drop table if exists ACT_ID_PRIV_MAPPING cascade;
