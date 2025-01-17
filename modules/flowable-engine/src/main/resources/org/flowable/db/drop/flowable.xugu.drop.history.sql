@@ -15,8 +15,8 @@ drop index ACT_HI_IDENTITYLINK.ACT_IDX_HI_IDENT_LNK_TASK;
 drop index ACT_HI_IDENTITYLINK.ACT_IDX_HI_IDENT_LNK_PROCINST;
 drop index ACT_HI_TASKINST.ACT_IDX_HI_TASK_INST_PROCINST;
 
-drop table if exists ACT_HI_PROCINST;
-drop table if exists ACT_HI_ACTINST;
-drop table if exists ACT_HI_DETAIL;
-drop table if exists ACT_HI_COMMENT;
-drop table if exists ACT_HI_ATTACHMENT;
+drop table if exists ACT_HI_PROCINST cascade;
+drop table if exists ACT_HI_ACTINST cascade;
+drop table if exists ACT_HI_DETAIL cascade;
+drop table if exists ACT_HI_COMMENT cascade;
+drop table if exists ACT_HI_ATTACHMENT cascade;

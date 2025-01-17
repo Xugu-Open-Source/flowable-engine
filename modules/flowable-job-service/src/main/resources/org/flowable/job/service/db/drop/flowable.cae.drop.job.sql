@@ -44,9 +44,9 @@ alter table ACT_RU_EXTERNAL_JOB
 alter table ACT_RU_EXTERNAL_JOB
     drop CONSTRAINT ACT_FK_EXTERNAL_JOB_CUSTOM_VALUES;
 
-drop table if exists ACT_RU_JOB;
-drop table if exists ACT_RU_TIMER_JOB;
-drop table if exists ACT_RU_SUSPENDED_JOB;
-drop table if exists ACT_RU_DEADLETTER_JOB;
-drop table if exists ACT_RU_HISTORY_JOB;
-drop table if exists ACT_RU_EXTERNAL_JOB;
+drop table if exists ACT_RU_JOB cascade;
+drop table if exists ACT_RU_TIMER_JOB cascade;
+drop table if exists ACT_RU_SUSPENDED_JOB cascade;
+drop table if exists ACT_RU_DEADLETTER_JOB cascade;
+drop table if exists ACT_RU_HISTORY_JOB cascade;
+drop table if exists ACT_RU_EXTERNAL_JOB cascade;
