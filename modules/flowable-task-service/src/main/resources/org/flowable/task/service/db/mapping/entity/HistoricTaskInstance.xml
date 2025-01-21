@@ -386,7 +386,7 @@
   </delete>
   
   <delete id="bulkDeleteHistoricTaskInstancesForNonExistingProcessInstances" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.PROC_INST_ID_ is not null and TASK.PROC_INST_ID_ != '' and
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu' and _databaseId != 'cae'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.PROC_INST_ID_ is not null and TASK.PROC_INST_ID_ != '' and
     NOT EXISTS (select PROCINST.ID_ from ${prefix}ACT_HI_PROCINST PROCINST where TASK.PROC_INST_ID_ = PROCINST.ID_)
   </delete>
   
@@ -406,7 +406,7 @@
   </delete>
 
   <delete id="bulkDeleteHistoricTaskInstancesForNonExistingCaseInstances" parameterType="java.util.Map">
-    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.SCOPE_ID_ is not null and TASK.SCOPE_ID_ != '' and TASK.SCOPE_TYPE_ = 'cmmn' and
+    delete <if test="_databaseId != 'postgres' and _databaseId != 'cockroachdb' and _databaseId != 'db2' and _databaseId != 'xugu' and _databaseId != 'cae'"> TASK </if> from ${prefix}ACT_HI_TASKINST TASK where TASK.SCOPE_ID_ is not null and TASK.SCOPE_ID_ != '' and TASK.SCOPE_TYPE_ = 'cmmn' and
     NOT EXISTS (select CASEINST.ID_ from ${prefix}ACT_CMMN_HI_CASE_INST CASEINST where TASK.SCOPE_ID_ = CASEINST.ID_)
   </delete>
   
@@ -1455,28 +1455,28 @@
         and (${queryTablePrefix}DELETE_REASON_ = '' or ${queryTablePrefix}DELETE_REASON_ is null)
       </if>
       <if test="parentScopeId != null">
-          and EXISTS(select 1 from ${prefix}ACT_HI_ENTITYLINK LINK where
-            LINK.SCOPE_ID_ = #{parentScopeId, jdbcType=NVARCHAR}
-            and LINK.REF_SCOPE_ID_ = RES.ID_
-            and LINK.HIERARCHY_TYPE_ = 'parent'
+          and EXISTS(select 1 from ${prefix}ACT_HI_ENTITYLINK LINK1 where
+            LINK1.SCOPE_ID_ = #{parentScopeId, jdbcType=NVARCHAR}
+            and LINK1.REF_SCOPE_ID_ = RES.ID_
+            and LINK1.HIERARCHY_TYPE_ = 'parent'
           )
       </if>
       <if test="rootScopeId != null">
           and exists(
-            select 1 from ${prefix}ACT_HI_ENTITYLINK LINK where
-                LINK.REF_SCOPE_ID_ = RES.ID_
-                and LINK.ROOT_SCOPE_ID_ = #{rootScopeId, jdbcType=NVARCHAR}
+            select 1 from ${prefix}ACT_HI_ENTITYLINK LINK1 where
+                LINK1.REF_SCOPE_ID_ = RES.ID_
+                and LINK1.ROOT_SCOPE_ID_ = #{rootScopeId, jdbcType=NVARCHAR}
           )
       </if>
       <if test="candidateUser != null || candidateGroups != null">
         <if test="!ignoreAssigneeValue">
             and ${queryTablePrefix}ASSIGNEE_ is null
         </if>
-        and EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = ${queryTablePrefix}ID_
+        and EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = ${queryTablePrefix}ID_
             and
             (
               <if test="candidateUser != null">
-                LINK.USER_ID_ = #{candidateUser, jdbcType=NVARCHAR}
+                LINK1.USER_ID_ = #{candidateUser, jdbcType=NVARCHAR}
               </if>
               <if test="candidateUser != null &amp;&amp; candidateGroups != null &amp;&amp; !candidateGroups.empty">
                 or
@@ -1487,7 +1487,7 @@
                 	<if test="groupIndex &gt; 0">
                 	or
                 	</if>
-                	LINK.GROUP_ID_ IN
+                	LINK1.GROUP_ID_ IN
                 	<foreach item="group" index="index" collection="candidateGroupListItem"
                          open="(" separator="," close=")">
                   	  #{group, jdbcType=NVARCHAR}
@@ -1500,19 +1500,19 @@
       </if>
       <if test="involvedUser != null">
         and (
-          EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.USER_ID_ = #{involvedUser, jdbcType=NVARCHAR} and LINK.TASK_ID_ = ${queryTablePrefix}ID_)
+          EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{involvedUser, jdbcType=NVARCHAR} and LINK1.TASK_ID_ = ${queryTablePrefix}ID_)
           or ${queryTablePrefix}ASSIGNEE_ = #{involvedUser, jdbcType=NVARCHAR}
           or ${queryTablePrefix}OWNER_ = #{involvedUser, jdbcType=NVARCHAR}
           )
       </if>
       <if test="involvedGroups != null">
-        and EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ = ${queryTablePrefix}ID_ and
+        and EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = ${queryTablePrefix}ID_ and
             (
     		<foreach item="involvedGroupListItem" index="groupIndex" collection="safeInvolvedGroups">
     			<if test="groupIndex &gt; 0">
     			or
     			</if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group, jdbcType=NVARCHAR}
@@ -1806,11 +1806,11 @@
         or (${queryTablePrefix}DELETE_REASON_ = '' or ${queryTablePrefix}DELETE_REASON_ is null)
       </if>
       <if test="orQueryObject.candidateUser != null || orQueryObject.candidateGroups != null">
-        or (EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TYPE_ = 'candidate' and LINK.TASK_ID_ = ${queryTablePrefix}ID_
+        or (EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TYPE_ = 'candidate' and LINK1.TASK_ID_ = ${queryTablePrefix}ID_
             and
             (
               <if test="orQueryObject.candidateUser != null">
-                LINK.USER_ID_ = #{orQueryObject.candidateUser, jdbcType=NVARCHAR}
+                LINK1.USER_ID_ = #{orQueryObject.candidateUser, jdbcType=NVARCHAR}
               </if>
               <if test="orQueryObject.candidateUser != null &amp;&amp; orQueryObject.candidateGroups != null &amp;&amp; !orQueryObject.candidateGroups.empty">
                 or
@@ -1821,7 +1821,7 @@
                     <if test="groupIndex &gt; 0">
                     or
                     </if>
-                    LINK.GROUP_ID_ IN
+                    LINK1.GROUP_ID_ IN
                     <foreach item="group" index="index" collection="candidateGroupListItem"
                          open="(" separator="," close=")">
                       #{group, jdbcType=NVARCHAR}
@@ -1838,20 +1838,20 @@
       </if>
       <if test="orQueryObject.involvedUser != null">
         or (
-          EXISTS(select LINK.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.USER_ID_ = #{orQueryObject.involvedUser, jdbcType=NVARCHAR} and LINK.TASK_ID_ = ${queryTablePrefix}ID_)
+          EXISTS(select LINK1.ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.USER_ID_ = #{orQueryObject.involvedUser, jdbcType=NVARCHAR} and LINK1.TASK_ID_ = ${queryTablePrefix}ID_)
           or ${queryTablePrefix}ASSIGNEE_ = #{orQueryObject.involvedUser, jdbcType=NVARCHAR}
           or ${queryTablePrefix}OWNER_ = #{orQueryObject.involvedUser, jdbcType=NVARCHAR}
           )
       </if>
       <if test="orQueryObject.involvedGroups != null">
         or
-          EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK where LINK.TASK_ID_ = ${queryTablePrefix}ID_ and
+          EXISTS(select ID_ from ${prefix}ACT_HI_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = ${queryTablePrefix}ID_ and
             (
     		<foreach item="involvedGroupListItem" index="groupIndex" collection="orQueryObject.safeInvolvedGroups">
     			<if test="groupIndex &gt; 0">
     			or
     			</if>
-                LINK.GROUP_ID_ IN
+                LINK1.GROUP_ID_ IN
                 <foreach item="group" index="index" collection="involvedGroupListItem"
                       open="(" separator="," close=")">
                   #{group, jdbcType=NVARCHAR}
@@ -1861,17 +1861,17 @@
           )
       </if>
       <if test="orQueryObject.parentScopeId != null">
-          or EXISTS(select 1 from ${prefix}ACT_HI_ENTITYLINK LINK where
-          LINK.SCOPE_ID_ = #{orQueryObject.parentScopeId, jdbcType=NVARCHAR}
-          and LINK.REF_SCOPE_ID_ = RES.ID_
-          and LINK.HIERARCHY_TYPE_ = 'parent'
+          or EXISTS(select 1 from ${prefix}ACT_HI_ENTITYLINK LINK1 where
+          LINK1.SCOPE_ID_ = #{orQueryObject.parentScopeId, jdbcType=NVARCHAR}
+          and LINK1.REF_SCOPE_ID_ = RES.ID_
+          and LINK1.HIERARCHY_TYPE_ = 'parent'
           )
       </if>
       <if test="orQueryObject.rootScopeId != null">
           or exists(
-          select 1 from ${prefix}ACT_HI_ENTITYLINK LINK where
-          LINK.REF_SCOPE_ID_ = RES.ID_
-          and LINK.ROOT_SCOPE_ID_ = #{orQueryObject.rootScopeId, jdbcType=NVARCHAR}
+          select 1 from ${prefix}ACT_HI_ENTITYLINK LINK1 where
+          LINK1.REF_SCOPE_ID_ = RES.ID_
+          and LINK1.ROOT_SCOPE_ID_ = #{orQueryObject.rootScopeId, jdbcType=NVARCHAR}
           )
       </if>
   </sql>

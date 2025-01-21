@@ -414,16 +414,16 @@
                 and lower(RES.NAME_) like lower(#{nameLikeIgnoreCase, jdbcType=NVARCHAR})${wildcardEscapeClause}
             </if>
             <if test="parentScopeId != null">
-                and EXISTS(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK where
-                    LINK.SCOPE_ID_ = #{parentScopeId, jdbcType=NVARCHAR}
-                    and LINK.REF_SCOPE_ID_ = RES.ID_
-                    and LINK.HIERARCHY_TYPE_ = 'parent'
+                and EXISTS(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK1 where
+                    LINK1.SCOPE_ID_ = #{parentScopeId, jdbcType=NVARCHAR}
+                    and LINK1.REF_SCOPE_ID_ = RES.ID_
+                    and LINK1.HIERARCHY_TYPE_ = 'parent'
                 )
             </if>
             <if test="rootScopeId != null">
-                and exists(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK where
-                    LINK.REF_SCOPE_ID_ = RES.ID_
-                    and LINK.ROOT_SCOPE_ID_ = #{rootScopeId, jdbcType=NVARCHAR}
+                and exists(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK1 where
+                    LINK1.REF_SCOPE_ID_ = RES.ID_
+                    and LINK1.ROOT_SCOPE_ID_ = #{rootScopeId, jdbcType=NVARCHAR}
                 )
             </if>
             <if test="businessKey != null">
@@ -798,16 +798,16 @@
 			            I.GROUP_ID_ = #{orQueryObject.involvedGroupIdentityLink.groupId, jdbcType=NVARCHAR} and I.TYPE_ = #{orQueryObject.involvedGroupIdentityLink.type, jdbcType=NVARCHAR})
 			        </if>
                     <if test="orQueryObject.parentScopeId != null">
-                        or EXISTS(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK where
-                            LINK.SCOPE_ID_ = #{orQueryObject.parentScopeId, jdbcType=NVARCHAR}
-                            and LINK.REF_SCOPE_ID_ = RES.ID_
-                            and LINK.HIERARCHY_TYPE_ = 'parent'
+                        or EXISTS(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK1 where
+                            LINK1.SCOPE_ID_ = #{orQueryObject.parentScopeId, jdbcType=NVARCHAR}
+                            and LINK1.REF_SCOPE_ID_ = RES.ID_
+                            and LINK1.HIERARCHY_TYPE_ = 'parent'
                         )
                     </if>
                     <if test="orQueryObject.rootScopeId != null">
-                        or exists(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK where
-                            LINK.REF_SCOPE_ID_ = RES.ID_
-                            and LINK.ROOT_SCOPE_ID_ = #{orQueryObject.rootScopeId, jdbcType=NVARCHAR}
+                        or exists(select 1 from ${prefix}ACT_RU_ENTITYLINK LINK1 where
+                            LINK1.REF_SCOPE_ID_ = RES.ID_
+                            and LINK1.ROOT_SCOPE_ID_ = #{orQueryObject.rootScopeId, jdbcType=NVARCHAR}
                         )
                     </if>
                     <foreach collection="orQueryObject.queryVariableValues" index="index" item="queryVariableValue">

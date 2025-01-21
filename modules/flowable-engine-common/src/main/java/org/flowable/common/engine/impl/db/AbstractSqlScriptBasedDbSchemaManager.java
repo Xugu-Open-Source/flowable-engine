@@ -399,6 +399,11 @@ public abstract class AbstractSqlScriptBasedDbSchemaManager implements SchemaMan
             if ((exceptionMessage.contains("relation") || exceptionMessage.contains("table")) && (exceptionMessage.contains("does not exist"))) {
                 return true;
             }
+
+            // Message returned from xugu and cae
+            if ((exceptionMessage.contains("表或视图") && exceptionMessage.contains("不存在")) || (exceptionMessage.contains("E5021"))) {
+                return true;
+            }
         }
         return false;
     }

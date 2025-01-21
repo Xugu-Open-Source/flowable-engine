@@ -73,6 +73,42 @@ public class DbSqlSessionFactory implements SessionFactory {
         addDatabaseSpecificStatement("mysql", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
         addDatabaseSpecificStatement("mysql", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
 
+        // xugu specific
+        databaseSpecificLimitBeforeStatements.put("xugu", "");
+        databaseSpecificLimitAfterStatements.put("xugu", "LIMIT #{maxResults} OFFSET #{firstResult}");
+        databaseSpecificLimitBetweenStatements.put("xugu", "");
+        databaseOuterJoinLimitBetweenStatements.put("xugu", "");
+        databaseSpecificOrderByStatements.put("xugu", defaultOrderBy);
+        addDatabaseSpecificStatement("xugu", "selectProcessDefinitionsByQueryCriteria", "selectProcessDefinitionsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectProcessDefinitionCountByQueryCriteria", "selectProcessDefinitionCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectDeploymentsByQueryCriteria", "selectDeploymentsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectDeploymentCountByQueryCriteria", "selectDeploymentCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "selectModelCountByQueryCriteria", "selectModelCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("xugu", "updateExecutionTenantIdForDeployment", "updateExecutionTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateTaskTenantIdForDeployment", "updateTaskTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateJobTenantIdForDeployment", "updateJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateTimerJobTenantIdForDeployment", "updateTimerJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("xugu", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
+
+        // cae specific
+        databaseSpecificLimitBeforeStatements.put("cae", "");
+        databaseSpecificLimitAfterStatements.put("cae", "LIMIT #{maxResults} OFFSET #{firstResult}");
+        databaseSpecificLimitBetweenStatements.put("cae", "");
+        databaseOuterJoinLimitBetweenStatements.put("cae", "");
+        databaseSpecificOrderByStatements.put("cae", defaultOrderBy);
+        addDatabaseSpecificStatement("cae", "selectProcessDefinitionsByQueryCriteria", "selectProcessDefinitionsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectProcessDefinitionCountByQueryCriteria", "selectProcessDefinitionCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectDeploymentsByQueryCriteria", "selectDeploymentsByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectDeploymentCountByQueryCriteria", "selectDeploymentCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "selectModelCountByQueryCriteria", "selectModelCountByQueryCriteria_mysql");
+        addDatabaseSpecificStatement("cae", "updateExecutionTenantIdForDeployment", "updateExecutionTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateTaskTenantIdForDeployment", "updateTaskTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateJobTenantIdForDeployment", "updateJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateTimerJobTenantIdForDeployment", "updateTimerJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateSuspendedJobTenantIdForDeployment", "updateSuspendedJobTenantIdForDeployment_mysql");
+        addDatabaseSpecificStatement("cae", "updateDeadLetterJobTenantIdForDeployment", "updateDeadLetterJobTenantIdForDeployment_mysql");
+
         // postgres specific
         databaseSpecificLimitBeforeStatements.put("postgres", "");
         databaseSpecificLimitAfterStatements.put("postgres", "LIMIT #{maxResults} OFFSET #{firstResult}");
